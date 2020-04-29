@@ -113,22 +113,21 @@
         $query = $this->db->query("select * from comment where id='$id'");
         return $query->result_array();
     }
+	
+    public function tambahbarupasien($id,$nama,$asal,$golongan_darah, $tanggal, $status, $umur, $jeniskelamin){
+            $query = $this->db->query("INSERT INTO pasien values('$id','$nama','$asal','$golongan_darah','$tanggal','$status',$umur,'$jeniskelamin','pasien')");
+            return $query;
+        }
+    public function editpasien($id, $nama, $asal, $golongan, $tanggal, $status, $umur, $jeniskelamin){
+            $query = $this->db->query("UPDATE pasien set `nama` = '$nama', `asal` = '$asal', `golongan_darah`= '$golongan', `tanggal_masuk` = '$tanggal', `status` = '$status', `umur` = $umur, `jeniskelamin` = '$jeniskelamin' where id='$id'");
+            return $query;
+        }
+    public function hapus($tab,$column,$id)
+        {
+            $query= $this->db->query("DELETE FROM $tab where $column ='$id'");
+            return $query;
+        }
+	    
 }
-
- //crud Admin 
-    public function tambahbaruadmin($id, $nama, $katasandi, $asal, $nohp, $email)
-    {
-        $query = $this->db->query("INSERT INTO `admin` values('$id','$nama','$asal','$katasandi',md5(md5(md5('$katasandi'))),'$nohp','$email@sppk.co.id','admin')");
-        return $query;
-    }
-    public function editadmin($id, $nama, $katasandi, $asal, $nohp, $email)
-    {
-        $query = $this->db->query("UPDATE `admin` set `nama` = '$nama', `asal` = '$asal', `katasandi`= '$katasandi', `password`= md5(md5(md5('$katasandi'))), `no_hp` = '$nohp', `email` = '$email' where id='$id'");
-        return $query;
-    }
-    public function hapus_admin($tab, $column, $id)
-    {
-        $query = $this->db->query("DELETE FROM $tab where $column ='$id'");
-        return $query;
-    }
+	
 ?>
